@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rifa da Raquel — 2 Aninhos 👑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root{
+    --rosa-fundo:#FDF3F6;
+    --rosa-claro:#FBE4EC;
+    --rosa-medio:#EFB8CC;
+    --rosa-forte:#C9527E;
+    --rosa-escuro:#8A3A57;
+    --dourado:#C9A24B;
+    --azul-suave:#6E93B5;
+    --azul-fundo:#EDF3F8;
+    --texto:#5C3A47;
+    --branco:#FFFFFF;
+    --verde-ok:#3E9B6B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Quicksand',sans-serif;
+    background:var(--rosa-fundo);
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(239,184,204,.25) 0, transparent 45%),
+      radial-gradient(circle at 85% 10%, rgba(201,162,75,.10) 0, transparent 40%),
+      radial-gradient(circle at 80% 85%, rgba(239,184,204,.20) 0, transparent 45%);
+    color:var(--texto);
+    min-height:100vh;
+  }
+  .container{max-width:900px;margin:0 auto;padding:0 16px}
+
+  /* ===== HERO ===== */
+  header{padding:36px 0 8px;text-align:center;position:relative;overflow:hidden}
+  .coroa{font-size:34px;display:block;margin-bottom:2px}
+  h1{
+    font-family:'Great Vibes',cursive;
+    font-weight:400;
+    font-size:clamp(44px,9vw,72px);
+    color:var(--rosa-forte);
+    line-height:1.05;
+  }
+  .subtitulo{
+    font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--rosa-escuro);margin-top:6px;
+  }
+  .data-festa{
+    display:inline-block;margin-top:12px;padding:7px 18px;border-radius:999px;
+    background:var(--branco);border:1px dashed var(--rosa-medio);
+    font-size:14px;font-weight:600;color:var(--rosa-escuro);
+  }
+  .sparkle{position:absolute;font-size:16px;opacity:.55;animation:brilho 3s ease-in-out infinite}
+  .sparkle:nth-child(1){top:18%;left:10%;animation-delay:.2s}
+  .sparkle:nth-child(2){top:10%;right:14%;animation-delay:1s}
+  .sparkle:nth-child(3){bottom:12%;left:22%;animation-delay:1.7s;font-size:12px}
+  .sparkle:nth-child(4){bottom:20%;right:8%;animation-delay:.6s;font-size:13px}
+  @keyframes brilho{0%,100%{opacity:.2;transform:scale(.9)}50%{opacity:.8;transform:scale(1.1)}}
+  @media (prefers-reduced-motion:reduce){.sparkle{animation:none}}
+
+  /* ===== FOTOS ===== */
+  .fotos{
+    display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+    padding:22px 16px 10px;
+  }
+  .polaroid{
+    background:var(--branco);padding:8px 8px 26px;border-radius:6px;
+    box-shadow:0 8px 20px rgba(138,58,87,.15);
+    width:min(190px,42vw);position:relative;
+  }
+  .polaroid::before{
+    content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);
+    width:56px;height:18px;background:rgba(239,184,204,.75);border-radius:2px;
+  }
+  .polaroid:nth-child(1){transform:rotate(-3deg)}
+  .polaroid:nth-child(2){transform:rotate(1.5deg)}
+  .polaroid:nth-child(3){transform:rotate(-1deg)}
+  .polaroid img,.polaroid .foto-vazia{
+    width:100%;aspect-ratio:1/1.05;object-fit:cover;border-radius:3px;display:block;
+  }
+  .foto-vazia{
+    background:linear-gradient(160deg,var(--rosa-claro),var(--rosa-medio));
+    display:flex;align-items:center;justify-content:center;font-size:44px;
+  }
+
+  /* ===== SEÇÕES ===== */
+  section{padding:26px 0}
+  .rotulo{
+    text-align:center;font-size:13px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--dourado);margin-bottom:14px;
+  }
+
+  /* ===== CARDS DE PRÊMIO ===== */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:560px){.cards{grid-template-columns:1fr}}
+  .card{
+    background:var(--branco);border:2px solid transparent;border-radius:18px;
+    padding:10px 10px 14px;cursor:pointer;text-align:center;
+    box-shadow:0 6px 18px rgba(138,58,87,.08);
+    transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
+  }
+  .card .arte{
+    width:100%;display:block;border-radius:12px;margin-bottom:10px;
+  }
+  .card .arte-vazia{
+    width:100%;aspect-ratio:9/12;border-radius:12px;margin-bottom:10px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:8px;font-size:44px;background:linear-gradient(160deg,var(--rosa-claro),var(--rosa-medio));
+  }
+  .card .arte-vazia strong{font-size:17px}
+  .card:hover{transform:translateY(-2px)}
+  .card:focus-visible{outline:3px solid var(--rosa-forte);outline-offset:2px}
+  .card .icone{font-size:38px;display:block;margin-bottom:6px}
+  .card h3{font-size:19px;font-weight:700;margin-bottom:4px}
+  .card p{font-size:13.5px;line-height:1.45;opacity:.85}
+  .card .tag{
+    display:inline-block;margin-top:10px;font-size:12px;font-weight:700;
+    padding:4px 12px;border-radius:999px;
+  }
+  .card-fem .tag{background:var(--rosa-claro);color:var(--rosa-escuro)}
+  .card-masc .tag{background:var(--azul-fundo);color:var(--azul-suave)}
+  .card-fem.ativo{border-color:var(--rosa-forte);box-shadow:0 8px 24px rgba(201,82,126,.22)}
+  .card-masc.ativo{border-color:var(--azul-suave);box-shadow:0 8px 24px rgba(110,147,181,.25)}
+
+  /* ===== NÚMEROS ===== */
+  .instrucao{text-align:center;font-size:14px;margin-bottom:14px;opacity:.85}
+  .grade{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));
+    gap:8px;
+  }
+  .num{
+    border:1.5px solid var(--rosa-medio);background:var(--branco);
+    border-radius:12px;padding:10px 2px;font-family:'Quicksand';font-weight:700;
+    font-size:14px;color:var(--texto);cursor:pointer;text-align:center;
+    transition:all .12s ease;
+  }
+  .num:hover:not(:disabled){border-color:var(--rosa-forte);transform:scale(1.05)}
+  .num:focus-visible{outline:3px solid var(--rosa-forte);outline-offset:1px}
+  .num.masc{border-color:#C4D6E5}
+  .num.masc:hover:not(:disabled){border-color:var(--azul-suave)}
+  .num.sel{background:var(--rosa-forte);border-color:var(--rosa-forte);color:#fff}
+  .num.masc.sel{background:var(--azul-suave);border-color:var(--azul-suave)}
+  .num:disabled{
+    background:#F1E7EA;border-color:#E4D4DA;color:#B99FA9;
+    text-decoration:line-through;cursor:not-allowed;
+  }
+  .legenda{display:flex;justify-content:center;gap:18px;margin-top:14px;font-size:12.5px;flex-wrap:wrap}
+  .legenda span{display:flex;align-items:center;gap:6px}
+  .bolinha{width:14px;height:14px;border-radius:5px;display:inline-block}
+  .b-disp{background:var(--branco);border:1.5px solid var(--rosa-medio)}
+  .b-sel{background:var(--rosa-forte)}
+  .b-vend{background:#F1E7EA;border:1.5px solid #E4D4DA}
+  .carregando{text-align:center;padding:30px;font-size:14px;opacity:.7}
+
+  /* ===== RESUMO / FORM ===== */
+  .painel{
+    background:var(--branco);border-radius:20px;padding:24px 20px;
+    box-shadow:0 10px 30px rgba(138,58,87,.10);border:1px solid var(--rosa-claro);
+  }
+  .selecionados{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 16px;min-height:30px}
+  .chip{
+    background:var(--rosa-claro);color:var(--rosa-escuro);font-weight:700;font-size:13px;
+    padding:5px 12px;border-radius:999px;
+  }
+  .chip.masc{background:var(--azul-fundo);color:var(--azul-suave)}
+  .vazio{font-size:13.5px;opacity:.6;font-style:italic}
+  .linha-total{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:10px 0;border-top:1px dashed var(--rosa-medio);font-size:14px;
+  }
+  .linha-total strong{font-size:15px}
+  .total-valor{font-size:26px;font-weight:700;color:var(--rosa-forte)}
+  .promo{
+    background:var(--rosa-claro);border-radius:12px;padding:10px 14px;
+    font-size:13px;font-weight:600;color:var(--rosa-escuro);text-align:center;margin:10px 0;
+  }
+  label{display:block;font-size:13px;font-weight:700;margin:14px 0 5px}
+  input[type=text],input[type=tel]{
+    width:100%;padding:12px 14px;border:1.5px solid var(--rosa-medio);border-radius:12px;
+    font-family:'Quicksand';font-size:15px;color:var(--texto);background:#FFFDFE;
+  }
+  input:focus{outline:none;border-color:var(--rosa-forte);box-shadow:0 0 0 3px rgba(201,82,126,.15)}
+  .btn{
+    width:100%;margin-top:20px;padding:15px;border:none;border-radius:999px;
+    background:linear-gradient(135deg,var(--rosa-forte),#E0729B);color:#fff;
+    font-family:'Quicksand';font-size:16px;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 20px rgba(201,82,126,.35);transition:transform .12s ease;
+  }
+  .btn:hover:not(:disabled){transform:translateY(-2px)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+  .aviso-prazo{
+    text-align:center;font-size:13px;font-weight:600;margin-top:12px;color:var(--rosa-escuro);
+  }
+  .erro{color:#B93A3A;font-size:13.5px;font-weight:600;text-align:center;margin-top:10px;display:none}
+
+  /* ===== MODAL PIX ===== */
+  .modal-fundo{
+    position:fixed;inset:0;background:rgba(92,58,71,.55);display:none;
+    align-items:center;justify-content:center;padding:16px;z-index:50;
+  }
+  .modal-fundo.aberto{display:flex}
+  .modal{
+    background:var(--branco);border-radius:22px;padding:30px 24px;max-width:420px;width:100%;
+    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);
+  }
+  .modal .coroa{font-size:40px}
+  .modal h2{font-family:'Great Vibes',cursive;font-weight:400;font-size:38px;color:var(--rosa-forte);margin:4px 0 8px}
+  .modal p{font-size:14px;line-height:1.55;margin-bottom:8px}
+  .pix-caixa{
+    background:var(--rosa-fundo);border:1.5px dashed var(--rosa-medio);border-radius:14px;
+    padding:14px;margin:14px 0;word-break:break-all;font-weight:700;font-size:15px;
+  }
+  .btn-copiar{
+    background:var(--rosa-claro);color:var(--rosa-escuro);border:none;border-radius:999px;
+    padding:10px 22px;font-family:'Quicksand';font-weight:700;font-size:14px;cursor:pointer;
+  }
+  .btn-fechar{
+    display:block;margin:16px auto 0;background:none;border:none;color:var(--texto);
+    font-family:'Quicksand';font-size:13px;font-weight:600;cursor:pointer;opacity:.7;text-decoration:underline;
+  }
+  .modal .total-modal{font-size:22px;font-weight:700;color:var(--rosa-forte)}
+
+  footer{text-align:center;padding:30px 16px 40px;font-size:13px;opacity:.7}
+</style>
+</head>
+<body>
+
+<header class="container">
+  <span class="sparkle">✨</span><span class="sparkle">✨</span>
+  <span class="sparkle">✨</span><span class="sparkle">✨</span>
+  <span class="coroa">👑</span>
+  <h1>Rifa da Raquel</h1>
+  <div class="subtitulo">2 aninhos da nossa princesa</div>
+  <div><span class="data-festa">💰 Pague até 15/07 · 🎁 Sorteio 17/07 · 🎂 Festa 19/07</span></div>
+</header>
+
+<div class="fotos container">
+  <div class="polaroid"><img src="fotos/raquel-1.jpg" alt="Raquel" onerror="fotoVazia(this)"></div>
+  <div class="polaroid"><img src="fotos/raquel-2.jpg" alt="Raquel" onerror="fotoVazia(this)"></div>
+  <div class="polaroid"><img src="fotos/raquel-3.jpg" alt="Raquel" onerror="fotoVazia(this)"></div>
+</div>
+
+<section class="container" id="premios">
+  <div class="rotulo">✦ Escolha o prêmio ✦</div>
+  <div class="cards">
+    <div class="card card-fem ativo" id="cardFem" role="button" tabindex="0" onclick="trocarRifa('A')" onkeydown="if(event.key==='Enter')trocarRifa('A')">
+      <img class="arte" src="fotos/rifa-feminina.png" data-tentativas="fotos/rifa-feminina.jpg|fotos/rifa-feminina.png.jpg" alt="Kit 4 Body Splash Iza Tonelli" onerror="proximaArte(this,'🌸','Kit 4 Body Splash')">
+      <span class="tag">Rifa feminina · Números terminados em A</span>
+    </div>
+    <div class="card card-masc" id="cardMasc" role="button" tabindex="0" onclick="trocarRifa('B')" onkeydown="if(event.key==='Enter')trocarRifa('B')">
+      <img class="arte" src="fotos/rifa-masculina.png" data-tentativas="fotos/rifa-masculina.jpg|fotos/rifa-masculina.png.jpg" alt="Parafusadeira e Furadeira" onerror="proximaArte(this,'🔧','Furadeira')">
+      <span class="tag">Rifa masculina · Números terminados em B</span>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="rotulo">✦ Escolha seus números ✦</div>
+  <p class="instrucao" id="instrucaoGrade">Toque nos números que deseja. Você pode participar das duas rifas na mesma compra!</p>
+  <div id="areaGrade">
+    <div class="carregando">Carregando números disponíveis... 🎀</div>
+  </div>
+  <div class="legenda">
+    <span><i class="bolinha b-disp"></i> Disponível</span>
+    <span><i class="bolinha b-sel"></i> Selecionado</span>
+    <span><i class="bolinha b-vend"></i> Vendido</span>
+  </div>
+</section>
+
+<section class="container" id="resumo">
+  <div class="rotulo">✦ Sua participação ✦</div>
+  <div class="painel">
+    <strong style="font-size:14px">Números selecionados:</strong>
+    <div class="selecionados" id="listaSel"><span class="vazio">Nenhum número selecionado ainda</span></div>
+
+    <div class="promo">💝 Cada número: R$ 6,00 · Levando 3 ou mais, sai por R$ 5,00 cada!</div>
+
+    <div class="linha-total"><span id="resumoQtd">0 número(s) × R$ 6,00</span> <span class="total-valor" id="total">R$ 0,00</span></div>
+
+    <label for="nome">Nome completo</label>
+    <input type="text" id="nome" placeholder="Seu nome completo" autocomplete="name">
+
+    <label for="telefone">Telefone (WhatsApp)</label>
+    <input type="tel" id="telefone" placeholder="(11) 99999-9999" autocomplete="tel">
+
+    <button class="btn" id="btnReservar" onclick="reservar()" disabled>Reservar meus números 🎀</button>
+    <div class="erro" id="msgErro"></div>
+    <p class="aviso-prazo">⏰ Após reservar, faça o Pix até <strong>15/07/2026</strong> para garantir seus números.</p>
+  </div>
+</section>
+
+<footer>Feito com amor para a festa da Raquel 💕 Qualquer dúvida, fale com o Tiago.</footer>
+
+<div class="modal-fundo" id="modalPix">
+  <div class="modal">
+    <span class="coroa">👑</span>
+    <h2>Números reservados!</h2>
+    <p>Obrigado, <strong id="modalNome"></strong>! Seus números: <strong id="modalNums"></strong></p>
+    <p>Valor a pagar:</p>
+    <div class="total-modal" id="modalTotal"></div>
+    <p style="margin-top:10px">Pague com Pix até <strong>15/07/2026</strong> — escaneie o QR Code ou use o copia e cola (o valor já vai preenchido!):</p>
+    <div id="qrPix" style="display:flex;justify-content:center;margin:14px 0"></div>
+    <div class="pix-caixa" id="pixChave" style="font-size:11px;font-weight:500;max-height:80px;overflow:auto"></div>
+    <button class="btn-copiar" onclick="copiarPix()">📋 Copiar código Pix</button>
+    <p style="margin-top:12px;font-size:13px;opacity:.8">Depois do Pix, envie o comprovante no WhatsApp do Tiago. 💕</p>
+    <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
+  </div>
+</div>
+
+<script>
+/* ============ CONFIGURAÇÃO ============ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbxzHdkZBni8-joAQge1r6ZtZhW9UTOS8ppZPrkiR7a1hEhTqXMyfhy_X5L6nonOuaM36g/exec';
+const CHAVE_PIX = '+5511960764543';                // Chave Pix (telefone no formato +55)
+const NOME_RECEBEDOR = 'TIAGO PEDROSO LOPES';      // Nome do titular da conta (máx. 25 letras, sem acento)
+const CIDADE_RECEBEDOR = 'ITAQUAQUECETUBA';        // Cidade do titular (máx. 15 letras, sem acento)
+const PRECO_UNIT = 6.00;
+const PRECO_PROMO = 5.00;   // a partir de 3 números
+const MIN_PROMO = 3;
+/* ====================================== */
+
+let numeros = [];        // [{n:'001A', vendido:false}, ...]
+let selecionados = new Set();
+let rifaAtiva = 'A';
+
+function fotoVazia(img){
+  const div = document.createElement('div');
+  div.className = 'foto-vazia';
+  div.textContent = '👑';
+  img.replaceWith(div);
+}
+
+function arteVazia(img, emoji, titulo){
+  const div = document.createElement('div');
+  div.className = 'arte-vazia';
+  div.innerHTML = `<span>${emoji}</span><strong>${titulo}</strong>`;
+  img.replaceWith(div);
+}
+
+function proximaArte(img, emoji, titulo){
+  const tentativas = (img.dataset.tentativas || '').split('|').filter(Boolean);
+  if (tentativas.length){
+    img.dataset.tentativas = tentativas.slice(1).join('|');
+    img.src = tentativas[0];
+  } else {
+    arteVazia(img, emoji, titulo);
+  }
+}
+
+function fmt(v){ return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+async function carregarNumeros(){
+  // Modo demonstração: gera números fictícios enquanto a API não está configurada
+  if (API_URL.startsWith('COLE_AQUI')){
+    numeros = [];
+    for (let i=1;i<=50;i++){
+      const n = String(i).padStart(3,'0');
+      numeros.push({n:n+'A', vendido:[3,7,12].includes(i)});
+      numeros.push({n:n+'B', vendido:[5,9].includes(i)});
+    }
+    desenharGrade();
+    return;
+  }
+  try{
+    const r = await fetch(API_URL);
+    const d = await r.json();
+    const vendidos = new Set((d.vendidos||[]).map(x=>x.toUpperCase()));
+    numeros = (d.numeros||[]).map(n=>({ n:n.toUpperCase(), vendido:vendidos.has(n.toUpperCase()) }));
+    desenharGrade();
+  }catch(e){
+    document.getElementById('areaGrade').innerHTML =
+      '<div class="carregando">Não foi possível carregar os números. Atualize a página e tente novamente. 🙏</div>';
+  }
+}
+
+function trocarRifa(letra){
+  rifaAtiva = letra;
+  document.getElementById('cardFem').classList.toggle('ativo', letra==='A');
+  document.getElementById('cardMasc').classList.toggle('ativo', letra==='B');
+  desenharGrade();
+}
+
+function desenharGrade(){
+  const area = document.getElementById('areaGrade');
+  const lista = numeros
+    .filter(x => x.n.endsWith(rifaAtiva))
+    .sort((a,b)=>parseInt(a.n)-parseInt(b.n));
+  if (!lista.length){
+    area.innerHTML = '<div class="carregando">Nenhum número encontrado para esta rifa.</div>';
+    return;
+  }
+  const grade = document.createElement('div');
+  grade.className = 'grade';
+  lista.forEach(item=>{
+    const b = document.createElement('button');
+    b.className = 'num' + (rifaAtiva==='B' ? ' masc':'') + (selecionados.has(item.n) ? ' sel':'');
+    b.textContent = item.n;
+    b.disabled = item.vendido;
+    b.setAttribute('aria-pressed', selecionados.has(item.n));
+    b.onclick = ()=>alternar(item.n, b);
+    grade.appendChild(b);
+  });
+  area.innerHTML = '';
+  area.appendChild(grade);
+}
+
+function alternar(n, btn){
+  if (selecionados.has(n)) selecionados.delete(n);
+  else selecionados.add(n);
+  btn.classList.toggle('sel');
+  btn.setAttribute('aria-pressed', selecionados.has(n));
+  atualizarResumo();
+}
+
+function atualizarResumo(){
+  const lista = [...selecionados].sort();
+  const el = document.getElementById('listaSel');
+  if (!lista.length){
+    el.innerHTML = '<span class="vazio">Nenhum número selecionado ainda</span>';
+  } else {
+    el.innerHTML = lista.map(n=>
+      `<span class="chip${n.endsWith('B')?' masc':''}">${n}</span>`).join('');
+  }
+  const qtd = lista.length;
+  const unit = qtd >= MIN_PROMO ? PRECO_PROMO : PRECO_UNIT;
+  const total = qtd * unit;
+  document.getElementById('resumoQtd').textContent = `${qtd} número(s) × ${fmt(unit)}`;
+  document.getElementById('total').textContent = fmt(total);
+  document.getElementById('btnReservar').disabled = qtd === 0;
+}
+
+function calcTotal(){
+  const qtd = selecionados.size;
+  const unit = qtd >= MIN_PROMO ? PRECO_PROMO : PRECO_UNIT;
+  return qtd * unit;
+}
+
+async function reservar(){
+  const nome = document.getElementById('nome').value.trim();
+  const tel  = document.getElementById('telefone').value.trim();
+  const erro = document.getElementById('msgErro');
+  erro.style.display = 'none';
+
+  if (!nome || nome.split(' ').length < 2){
+    erro.textContent = 'Por favor, informe seu nome completo.';
+    erro.style.display = 'block'; return;
+  }
+  if (tel.replace(/\D/g,'').length < 10){
+    erro.textContent = 'Por favor, informe um telefone válido com DDD.';
+    erro.style.display = 'block'; return;
+  }
+  if (!selecionados.size) return;
+
+  const nums = [...selecionados].sort();
+  const premios = [];
+  if (nums.some(n=>n.endsWith('A'))) premios.push('BODY SPLASH');
+  if (nums.some(n=>n.endsWith('B'))) premios.push('FURADEIRA');
+
+  const btn = document.getElementById('btnReservar');
+  btn.disabled = true; btn.textContent = 'Reservando... ⏳';
+
+  const payload = { nome, telefone: tel, numeros: nums, premios, total: calcTotal() };
+
+  try{
+    if (API_URL.startsWith('COLE_AQUI')){
+      // Modo demonstração
+      abrirModal(nome, nums, calcTotal());
+    } else {
+      const r = await fetch(API_URL, {
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify(payload)
+      });
+      const d = await r.json();
+      if (d.ok){
+        abrirModal(nome, nums, d.total ?? calcTotal());
+      } else if (d.conflitos && d.conflitos.length){
+        erro.textContent = 'Ops! O(s) número(s) ' + d.conflitos.join(', ') +
+          ' acabou(aram) de ser vendido(s). Escolha outro(s), por favor.';
+        erro.style.display = 'block';
+        d.conflitos.forEach(c=>selecionados.delete(c));
+        await carregarNumeros();
+        atualizarResumo();
+      } else {
+        throw new Error(d.erro || 'erro');
+      }
+    }
+  }catch(e){
+    erro.textContent = 'Não foi possível concluir a reserva. Tente novamente em instantes.';
+    erro.style.display = 'block';
+  }finally{
+    btn.disabled = selecionados.size === 0;
+    btn.textContent = 'Reservar meus números 🎀';
+  }
+}
+
+/* ===== Pix Copia e Cola (BR Code oficial do Banco Central) ===== */
+let pixAtual = '';
+
+function crc16(str){
+  let crc = 0xFFFF;
+  for (let i = 0; i < str.length; i++){
+    crc ^= str.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++){
+      crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+      crc &= 0xFFFF;
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4, '0');
+}
+
+function limparTexto(s, max){
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+          .replace(/[^A-Za-z0-9 ]/g,'').toUpperCase().substring(0, max).trim();
+}
+
+function gerarPixPayload(valor){
+  const campo = (id, v) => id + String(v.length).padStart(2,'0') + v;
+  const conta = campo('26', campo('00','br.gov.bcb.pix') + campo('01', CHAVE_PIX.trim()));
+  let p = campo('00','01')
+        + conta
+        + campo('52','0000')
+        + campo('53','986')
+        + campo('54', valor.toFixed(2))
+        + campo('58','BR')
+        + campo('59', limparTexto(NOME_RECEBEDOR, 25))
+        + campo('60', limparTexto(CIDADE_RECEBEDOR, 15))
+        + campo('62', campo('05','***'));
+  p += '6304';
+  return p + crc16(p);
+}
+
+function abrirModal(nome, nums, total){
+  document.getElementById('modalNome').textContent = nome.split(' ')[0];
+  document.getElementById('modalNums').textContent = nums.join(', ');
+  document.getElementById('modalTotal').textContent = fmt(total);
+
+  pixAtual = gerarPixPayload(total);
+  document.getElementById('pixChave').textContent = pixAtual;
+
+  const qr = document.getElementById('qrPix');
+  qr.innerHTML = '';
+  if (typeof QRCode !== 'undefined'){
+    new QRCode(qr, { text: pixAtual, width: 180, height: 180,
+      colorDark:'#5C3A47', colorLight:'#FFFFFF' });
+  }
+  document.getElementById('modalPix').classList.add('aberto');
+}
+
+function fecharModal(){
+  document.getElementById('modalPix').classList.remove('aberto');
+  selecionados.clear();
+  document.getElementById('nome').value = '';
+  document.getElementById('telefone').value = '';
+  atualizarResumo();
+  carregarNumeros();
+}
+
+function copiarPix(){
+  navigator.clipboard.writeText(pixAtual).then(()=>{
+    const b = document.querySelector('.btn-copiar');
+    b.textContent = '✅ Código copiado!';
+    setTimeout(()=>b.textContent='📋 Copiar código Pix', 2000);
+  });
+}
+
+carregarNumeros();
+</script>
+</body>
+</html>
