@@ -96,16 +96,17 @@
   }
 
   /* ===== CARDS DE PRÊMIO ===== */
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media (max-width:560px){.cards{grid-template-columns:1fr}}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:420px){.cards{gap:8px}}
   .card{
-    background:var(--branco);border:2px solid transparent;border-radius:18px;
-    padding:10px 10px 14px;cursor:pointer;text-align:center;
+    background:var(--branco);border:2px solid transparent;border-radius:14px;
+    padding:6px 6px 10px;cursor:pointer;text-align:center;
     box-shadow:0 6px 18px rgba(138,58,87,.08);
     transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
   }
   .card .arte{
-    width:100%;display:block;border-radius:12px;margin-bottom:10px;
+    width:100%;display:block;border-radius:9px;margin-bottom:8px;
+    max-height:280px;object-fit:cover;object-position:top;
   }
   .card .arte-vazia{
     width:100%;aspect-ratio:9/12;border-radius:12px;margin-bottom:10px;
@@ -119,8 +120,8 @@
   .card h3{font-size:19px;font-weight:700;margin-bottom:4px}
   .card p{font-size:13.5px;line-height:1.45;opacity:.85}
   .card .tag{
-    display:inline-block;margin-top:10px;font-size:12px;font-weight:700;
-    padding:4px 12px;border-radius:999px;
+    display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;
+    padding:3px 9px;border-radius:999px;letter-spacing:.02em;
   }
   .card-fem .tag{background:var(--rosa-claro);color:var(--rosa-escuro)}
   .card-masc .tag{background:var(--azul-fundo);color:var(--azul-suave)}
@@ -240,9 +241,9 @@
 </header>
 
 <div class="fotos container">
-  <div class="polaroid"><img src="fotos/raquel-1.jpg" alt="Raquel" onerror="fotoVazia(this)"></div>
-  <div class="polaroid"><img src="fotos/raquel-2.jpg" alt="Raquel" onerror="fotoVazia(this)"></div>
-  <div class="polaroid"><img src="fotos/raquel-3.jpg" alt="Raquel" onerror="fotoVazia(this)"></div>
+  <div class="polaroid"><img src="fotos/raquel-1.jpg" data-tentativas="fotos/raquel-1.jpg.jpg|fotos/raquel-1.jpeg|fotos/raquel-1.JPG|fotos/raquel-1.png" alt="Raquel" onerror="proximaFoto(this)"></div>
+  <div class="polaroid"><img src="fotos/raquel-2.jpg" data-tentativas="fotos/raquel-2.jpg.jpg|fotos/raquel-2.jpeg|fotos/raquel-2.JPG|fotos/raquel-2.png" alt="Raquel" onerror="proximaFoto(this)"></div>
+  <div class="polaroid"><img src="fotos/raquel-3.jpg" data-tentativas="fotos/raquel-3.jpg.jpg|fotos/raquel-3.jpeg|fotos/raquel-3.JPG|fotos/raquel-3.png" alt="Raquel" onerror="proximaFoto(this)"></div>
 </div>
 
 <section class="container" id="premios">
@@ -250,11 +251,11 @@
   <div class="cards">
     <div class="card card-fem ativo" id="cardFem" role="button" tabindex="0" onclick="trocarRifa('A')" onkeydown="if(event.key==='Enter')trocarRifa('A')">
       <img class="arte" src="fotos/rifa-feminina.png" data-tentativas="fotos/rifa-feminina.jpg|fotos/rifa-feminina.png.jpg" alt="Kit 4 Body Splash Iza Tonelli" onerror="proximaArte(this,'🌸','Kit 4 Body Splash')">
-      <span class="tag">Rifa feminina · Números terminados em A</span>
+      <span class="tag">🌸 Números com A</span>
     </div>
     <div class="card card-masc" id="cardMasc" role="button" tabindex="0" onclick="trocarRifa('B')" onkeydown="if(event.key==='Enter')trocarRifa('B')">
       <img class="arte" src="fotos/rifa-masculina.png" data-tentativas="fotos/rifa-masculina.jpg|fotos/rifa-masculina.png.jpg" alt="Parafusadeira e Furadeira" onerror="proximaArte(this,'🔧','Furadeira')">
-      <span class="tag">Rifa masculina · Números terminados em B</span>
+      <span class="tag">🔧 Números com B</span>
     </div>
   </div>
 </section>
@@ -332,6 +333,16 @@ function fotoVazia(img){
   div.className = 'foto-vazia';
   div.textContent = '👑';
   img.replaceWith(div);
+}
+
+function proximaFoto(img){
+  const tentativas = (img.dataset.tentativas || '').split('|').filter(Boolean);
+  if (tentativas.length){
+    img.dataset.tentativas = tentativas.slice(1).join('|');
+    img.src = tentativas[0];
+  } else {
+    fotoVazia(img);
+  }
 }
 
 function arteVazia(img, emoji, titulo){
